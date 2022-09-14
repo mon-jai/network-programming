@@ -1,5 +1,5 @@
 from typing import List
-from urllib import request
+from urllib.request import urlretrieve
 from zipfile import ZipFile
 import csv
 
@@ -8,7 +8,7 @@ def print_row(row: List[str]) -> None:
     print(f'{row[0]:>5}{row[1]:>12}{row[3]:>5}{row[12]:>5}')
 
 
-zipFileName, _ = request.urlretrieve(
+zipFileName, _ = urlretrieve(
     'https://data.ntpc.gov.tw/api/datasets/71CD1490-A2DF-4198-BEF1-318479775E8A/csv/zip')
 
 with ZipFile(zipFileName) as zipFile:
