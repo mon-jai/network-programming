@@ -13,11 +13,10 @@ zipFileName, _ = urlretrieve(
 
 with ZipFile(zipFileName) as zipFile:
     for fileName in zipFile.namelist():
-        zipFile.extract(fileName, './')
-        print(fileName)
+        csvFileName = zipFile.extract(fileName, './')
 
-        with open(fileName, 'r', encoding='UTF-8') as csvFile:
-            plots = csv.reader(csvFile, delimiter=',')
+        with open(csvFileName, 'r', encoding='UTF-8') as csvFile:
+            plots = csv.reader(csvFile)
 
             print_row(plots.__next__())
 
