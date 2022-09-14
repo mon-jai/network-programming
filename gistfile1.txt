@@ -2,10 +2,11 @@ from typing import List
 from urllib.request import urlretrieve
 from zipfile import ZipFile
 import csv
+from pandas import DataFrame
 
 
 def print_row(row: List[str]) -> None:
-    print(f'{row[0]:>5}{row[1]:>12}{row[2]:>5}{row[3]:>5}{row[8]:>12}{row[12]:>5}')
+    DataFrame(row[0], row[1], row[2], row[3], row[8], row[12])
 
 
 zipFileName, _ = urlretrieve(
@@ -18,8 +19,7 @@ with ZipFile(zipFileName) as zipFile:
         with open(csvFileName, 'r', encoding='UTF-8') as csvFile:
             plots = csv.reader(csvFile)
 
-            print_row(plots.__next__())
+            header = plots.__next__()
 
-            for row in plots:
-                if int(row[12]) > 5:
-                    print_row(row)
+            print(DataFrame([[row[0], row[1], row[2], row[3], row[8], row[12]]
+                            for row in plots if int(row[12]) > 5], [header[0], header[1], header[2], header[3], header[8], header[12]]))
