@@ -1,4 +1,5 @@
 {
+    // https://stackoverflow.com/a/53961913
     "code-runner.executorMap": {
         "python": "& \"$env:LocalAppData\\Programs\\Python\\Python310\\python\" -u",
     },
