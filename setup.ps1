@@ -11,7 +11,7 @@ Set-WinUILanguageOverride -Language en-US
 $languageList = New-WinUserLanguageList en-US
 $languageList.Add('zh-Hant-TW')
 $languageList[1].InputMethodTips.Clear()
-$languageList[1].InputMethodTips.Add('0404:00000409')
+$languageList[1].InputMethodTips.Add('0404:{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}{4BDF9F03-C7D3-11D4-B2AB-0080C882687E}')
 Set-WinUserLanguageList $languageList -Force
 
 Write-Output "Downloading Python..."
