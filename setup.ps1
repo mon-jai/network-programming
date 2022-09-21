@@ -1,6 +1,14 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup.ps1'))
 
+Write-Output "Setting language to English..."
+
+# https://stackoverflow.com/a/51374938
+Set-Culture en-US
+Set-WinSystemLocale -SystemLocale en-US
+Set-WinUILanguageOverride -Language en-US
+Set-WinUserLanguageList en-US -Force
+
 Write-Output "Downloading Python..."
 
 # https://stackoverflow.com/a/73534796
@@ -24,7 +32,3 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-progra
 code --install-extension ms-python.python
 code --install-extension formulahendry.code-runner
 code --install-extension github.github-vscode-theme
-
-$LanguageList = Get-WinUserLanguageList
-$LanguageList.Add("en-US")
-Set-WinUserLanguageList $LanguageList -Force
