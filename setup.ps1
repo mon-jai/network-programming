@@ -24,3 +24,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-progra
 code --install-extension ms-python.python
 code --install-extension formulahendry.code-runner
 code --install-extension github.github-vscode-theme
+
+$LanguageList = Get-WinUserLanguageList
+$LanguageList.Add("en-US")
+Set-WinUserLanguageList $LanguageList -Force
