@@ -1,6 +1,5 @@
-// https://stackoverflow.com/a/41237950
-// Set-ExecutionPolicy Bypass -scope Process -Force
-// 
+// https://stackoverflow.com/a/43905715
+// Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 
 // https://stackoverflow.com/a/73534796
