@@ -8,9 +8,11 @@
     "code-runner.runInTerminal": true,
     "code-runner.saveFileBeforeRun": true,
     "editor.tabSize": 2,
+    "explorer.confirmDelete": false,
     "files.associations": {
         "*.xml": "html"
     },
     "python.analysis.typeCheckingMode": "strict",
-    "workbench.colorTheme": "Default Light+"
+    "workbench.colorTheme": "Default Light+",
+    "workbench.startupEditor": "none"
 }
