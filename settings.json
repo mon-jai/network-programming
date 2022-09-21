@@ -1,12 +1,16 @@
 {
+    "code-runner.clearPreviousOutput": true,
     // https://stackoverflow.com/a/53961913
     "code-runner.executorMap": {
-        "python": "& \"$env:LocalAppData\\Programs\\Python\\Python310\\python\" -u",
+        "python": "& \"$env:LocalAppData\\Programs\\Python\\Python310\\python\" -u"
     },
-    "workbench.colorTheme": "Default Light+",
-    "python.analysis.typeCheckingMode": "strict",
-    "code-runner.clearPreviousOutput": true,
     "code-runner.ignoreSelection": true,
     "code-runner.runInTerminal": true,
-    "code-runner.saveFileBeforeRun": true
+    "code-runner.saveFileBeforeRun": true,
+    "editor.tabSize": 2,
+    "files.associations": {
+        "*.xml": "html"
+    },
+    "python.analysis.typeCheckingMode": "strict",
+    "workbench.colorTheme": "Default Light+"
 }
