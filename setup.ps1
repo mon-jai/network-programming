@@ -7,7 +7,6 @@ Write-Output "Setting language to English..."
 Set-Culture en-US
 Set-WinSystemLocale -SystemLocale en-US
 Set-WinUILanguageOverride -Language en-US
-Set-WinUserLanguageList en-US -Force
 
 $languageList = New-WinUserLanguageList en-US
 $languageList.Add('zh-Hant-TW')
