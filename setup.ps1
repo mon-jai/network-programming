@@ -1,5 +1,5 @@
 # https://stackoverflow.com/a/43905715
-# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/mon-jai/network-programming/blob/main/setup.ps1'))
+# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/blob/main/setup.ps1'))
 
 Write-Output "Downloading Python..."
 
@@ -20,6 +20,6 @@ Write-Output "Installing Python..."
 
 Write-Output "Setting up VSCode..."
 
-Invoke-WebRequest -Uri "https://github.dev/mon-jai/network-programming/blob/main/settings.json" -OutFile "C:\Users\LAB1223\AppData\Roaming\Code\User\settings.json"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/blob/main/settings.json" -OutFile "C:\Users\LAB1223\AppData\Roaming\Code\User\settings.json"
 code --install-extension ms-python.python
 code --install-extension formulahendry.code-runner
