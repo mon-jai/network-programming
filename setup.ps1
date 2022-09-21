@@ -9,6 +9,12 @@ Set-WinSystemLocale -SystemLocale en-US
 Set-WinUILanguageOverride -Language en-US
 Set-WinUserLanguageList en-US -Force
 
+$languageList = New-WinUserLanguageList en-US
+$languageList.Add('zh-Hant-TW')
+$languageList[1].InputMethodTips.Clear()
+$languageList[1].InputMethodTips.Add('0404:00000409')
+Set-WinUserLanguageList $languageList -Force
+
 Write-Output "Downloading Python..."
 
 # https://stackoverflow.com/a/73534796
