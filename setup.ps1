@@ -1,8 +1,16 @@
+// https://stackoverflow.com/a/41237950
+// Set-ExecutionPolicy Bypass -scope Process -Force
+// 
+
+
 // https://stackoverflow.com/a/73534796
 if (
   (Invoke-RestMethod 'https://www.python.org/downloads/') -notmatch 
   '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
 ) { throw "Could not determine latest Python version and download URL" }
+
+# https://stackoverflow.com/a/43477248
+$ProgressPreference = 'SilentlyContinue'
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 Invoke-WebRequest -Uri $Matches.url -OutFile "$($env:USERPROFILE)/python.exe";
