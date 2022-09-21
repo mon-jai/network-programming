@@ -15,3 +15,5 @@ Invoke-WebRequest -Uri $Matches.url -OutFile "$env:USERPROFILE/python.exe";
 & "$env:USERPROFILE/python.exe" /quiet InstallAllUsers=0 PrependPath=1 Include_test=0
 
 Invoke-WebRequest -Uri "https://gist.githubusercontent.com/mon-jai/f3a21942f2e2334ec12faefc5851c1f3/raw/c94255432e3097f2f2eac3662211186e788b86dd/settings.json" -OutFile "C:\Users\LAB1223\AppData\Roaming\Code\User\settings.json"
+code --install-extension ms-python.python
+code --install-extension formulahendry.code-runner
