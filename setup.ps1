@@ -31,8 +31,8 @@ Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0",
 Remove-Item $pythonDownloadPath
 
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
-code --install-extension ms-python.python
-code --install-extension formulahendry.code-runner
-code --install-extension github.github-vscode-theme
+code --install-extension ms-python.python --ignore-certificate-errors
+code --install-extension formulahendry.code-runner --ignore-certificate-errors
+code --install-extension github.github-vscode-theme --ignore-certificate-errors
 
 Write-Output "Done!"
