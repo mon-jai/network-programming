@@ -1,7 +1,6 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup.ps1'))
 
-$pythonDownloadPath = "$env:USERPROFILE/python.exe"
 
 Write-Output "Setting language...";
 
@@ -15,6 +14,9 @@ $languageList.Add('zh-Hant-TW')
 $languageList[1].InputMethodTips.Clear()
 $languageList[1].InputMethodTips.Add('0404:{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}{4BDF9F03-C7D3-11D4-B2AB-0080C882687E}')
 Set-WinUserLanguageList $languageList -Force
+
+Start-Job {
+$pythonDownloadPath = "$env:USERPROFILE/python.exe"
 
 Write-Output "Downloading Python..."
 
@@ -30,12 +32,17 @@ Write-Output "Installing Python..."
 # https://stackoverflow.com/a/1742758
 Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
 Remove-Item $pythonDownloadPath
+}
 
+Start-Job {
 Write-Output "Setting up VSCode..."
 
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
 code --install-extension ms-python.python --force
 code --install-extension formulahendry.code-runner --force
 code --install-extension github.github-vscode-theme --force
+}
+
+Get-Job | Recieve-Job
 
 Write-Output "Done!"
