@@ -30,6 +30,8 @@ Write-Output "Installing Python..."
 Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
 Remove-Item $pythonDownloadPath
 
+Write-Output "Setting up VSCode..."
+
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
 code --install-extension ms-python.python
 code --install-extension formulahendry.code-runner
