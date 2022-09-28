@@ -27,7 +27,7 @@ if (
 
 Write-Output "Installing Python..."
 
-& $pythonDownloadPath /quiet InstallAllUsers=0 PrependPath=1 Include_test=0
+$pythonDownloadPath /quiet InstallAllUsers=0 PrependPath=1 Include_test=0
 Remove-Item $pythonDownloadPath
 
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
