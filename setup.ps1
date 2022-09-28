@@ -45,6 +45,6 @@ code --install-extension github.github-vscode-theme --force
 Write-Output "Setting up VSCode... Done"
 }
 
-Get-Job | Receive-Job
+Get-Job | Receive-Job -Wait -AutoRemoveJob
 
 Write-Output "Done!"
