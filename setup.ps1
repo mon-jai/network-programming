@@ -21,7 +21,7 @@ if (
   ((New-Object System.Net.WebClient).DownloadString('https://www.python.org/downloads/')) -notmatch
   '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
 ) { throw "Could not determine latest Python version and download URL" }
-
+(New-Object System.Net.WebClient).DownloadFile($Matches.url, "$env:USERPROFILE/python.exe")
 
 Write-Output "Installing Python..."
 
