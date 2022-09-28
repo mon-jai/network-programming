@@ -1,6 +1,8 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup.ps1'))
 
+$pythonDownloadPath = "$env:USERPROFILE/python.exe"
+
 Write-Output "Setting language..."
 
 # https://stackoverflow.com/a/51374938
@@ -22,15 +24,14 @@ if (
   '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
 ) { throw "Could not determine latest Python version and download URL" }
 
-# https://stackoverflow.com/a/43477248
-$ProgressPreference = 'SilentlyContinue'
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# https://stackoverflow.com/a/21423159
 Import-Module BitsTransfer
-Start-BitsTransfer $Matches.url "$env:USERPROFILE/python.exe"
+Start-BitsTransfer $Matches.url $pythonDownloadPath
 
 Write-Output "Installing Python..."
 
-& "$env:USERPROFILE/python.exe" /quiet InstallAllUsers=0 PrependPath=1 Include_test=0
+Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
+Remove-Item $pythonDownloadPath
 
 Write-Output "Setting up VSCode..."
 
