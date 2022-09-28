@@ -14,6 +14,6 @@
   },
   "http.proxyStrictSSL": false,
   "python.analysis.typeCheckingMode": "strict",
-  "workbench.colorTheme": "Default Light+",
+  "workbench.colorTheme": "GitHub Light Default",
   "workbench.startupEditor": "none"
 }
