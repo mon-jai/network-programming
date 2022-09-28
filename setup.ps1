@@ -1,6 +1,7 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup.ps1'))
 
+$WebClient = New-Object System.Net.WebClient
 
 Write-Output "Setting language...";
 
@@ -16,33 +17,33 @@ $languageList[1].InputMethodTips.Add('0404:{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732
 Set-WinUserLanguageList $languageList -Force
 
 Start-Job {
-$pythonDownloadPath = "$env:USERPROFILE/python.exe"
+  $pythonDownloadPath = "$env:USERPROFILE/python.exe"
 
-Write-Output "Installing Python..."
+  Write-Output "Installing Python..."
 
-# https://stackoverflow.com/a/73534796
-if (
-  ((New-Object System.Net.WebClient).DownloadString('https://www.python.org/downloads/')) -notmatch
-  '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
-) { throw "Could not determine latest Python version and download URL" }
-(New-Object System.Net.WebClient).DownloadFile($Matches.url, $pythonDownloadPath)
+  # https://stackoverflow.com/a/73534796
+  if (
+    ($WebClient.DownloadString('https://www.python.org/downloads/')) -notmatch
+    '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
+  ) { throw "Could not determine latest Python version and download URL" }
+  $WebClient.DownloadFile($Matches.url, $pythonDownloadPath)
 
-# https://stackoverflow.com/a/1742758
-Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
-Remove-Item $pythonDownloadPath
+  # https://stackoverflow.com/a/1742758
+  Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
+  Remove-Item $pythonDownloadPath
 
-Write-Output "Installing Python... Done"
+  Write-Output "Installing Python... Done"
 }
 
 Start-Job {
-Write-Output "Setting up VSCode..."
+  Write-Output "Setting up VSCode..."
 
-(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
-code --install-extension ms-python.python --force
-code --install-extension formulahendry.code-runner --force
-code --install-extension github.github-vscode-theme --force
+  $WebClient.DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
+  code --install-extension ms-python.python --force
+  code --install-extension formulahendry.code-runner --force
+  code --install-extension github.github-vscode-theme --force
 
-Write-Output "Setting up VSCode... Done"
+  Write-Output "Setting up VSCode... Done"
 }
 
 Get-Job | Receive-Job -Wait -AutoRemoveJob
