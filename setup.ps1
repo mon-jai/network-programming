@@ -18,7 +18,7 @@ Set-WinUserLanguageList $languageList -Force
 Start-Job {
 $pythonDownloadPath = "$env:USERPROFILE/python.exe"
 
-Write-Output "Downloading Python..."
+Write-Output "Installing Python..."
 
 # https://stackoverflow.com/a/73534796
 if (
@@ -27,11 +27,11 @@ if (
 ) { throw "Could not determine latest Python version and download URL" }
 (New-Object System.Net.WebClient).DownloadFile($Matches.url, $pythonDownloadPath)
 
-Write-Output "Installing Python..."
-
 # https://stackoverflow.com/a/1742758
 Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
 Remove-Item $pythonDownloadPath
+
+Write-Output "Installing Python... Done"
 }
 
 Start-Job {
@@ -41,6 +41,8 @@ Write-Output "Setting up VSCode..."
 code --install-extension ms-python.python --force
 code --install-extension formulahendry.code-runner --force
 code --install-extension github.github-vscode-theme --force
+
+Write-Output "Setting up VSCode... Done"
 }
 
 Get-Job | Receive-Job
