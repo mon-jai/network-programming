@@ -1,7 +1,9 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup.ps1'))
 
-Write-Output "Setting language..."
+$pythonDownloadPath = "$env:USERPROFILE/python.exe"
+
+Write-Output "Setting language...";
 
 # https://stackoverflow.com/a/51374938
 Set-Culture en-US
@@ -21,13 +23,12 @@ if (
   ((New-Object System.Net.WebClient).DownloadString('https://www.python.org/downloads/')) -notmatch
   '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
 ) { throw "Could not determine latest Python version and download URL" }
-(New-Object System.Net.WebClient).DownloadFile($Matches.url, "$env:USERPROFILE/python.exe")
+(New-Object System.Net.WebClient).DownloadFile($Matches.url, $pythonDownloadPath)
 
 Write-Output "Installing Python..."
 
-& "$env:USERPROFILE/python.exe" /quiet InstallAllUsers=0 PrependPath=1 Include_test=0
-
-Write-Output "Setting up VSCode..."
+& "$pythonDownloadPath /quiet InstallAllUsers=0 PrependPath=1 Include_test=0
+Remove-Item $pythonDownloadPath
 
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
 code --install-extension ms-python.python
