@@ -1,8 +1,6 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup.ps1'))
 
-$WebClient = New-Object System.Net.WebClient
-
 Write-Output "Setting language...";
 
 # https://stackoverflow.com/a/51374938
@@ -23,10 +21,10 @@ Start-Job {
 
   # https://stackoverflow.com/a/73534796
   if (
-    ($WebClient.DownloadString('https://www.python.org/downloads/')) -notmatch
+    ((New-Object System.Net.WebClient).DownloadString('https://www.python.org/downloads/')) -notmatch
     '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
   ) { throw "Could not determine latest Python version and download URL" }
-  $WebClient.DownloadFile($Matches.url, $pythonDownloadPath)
+  (New-Object System.Net.WebClient).DownloadFile($Matches.url, $pythonDownloadPath)
 
   # https://stackoverflow.com/a/1742758
   Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
@@ -38,7 +36,7 @@ Start-Job {
 Start-Job {
   Write-Output "Setting up VSCode..."
 
-  $WebClient.DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
+  (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json", "$env:AppData\Code\User\settings.json")
   code --install-extension ms-python.python --force
   code --install-extension formulahendry.code-runner --force
   code --install-extension github.github-vscode-theme --force
