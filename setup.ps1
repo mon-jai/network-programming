@@ -27,6 +27,7 @@ if (
 
 Write-Output "Installing Python..."
 
+# https://stackoverflow.com/a/1742758
 Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
 Remove-Item $pythonDownloadPath
 
