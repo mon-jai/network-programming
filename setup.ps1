@@ -43,6 +43,6 @@ code --install-extension formulahendry.code-runner --force
 code --install-extension github.github-vscode-theme --force
 }
 
-Get-Job | Recieve-Job
+Get-Job | Receive-Job
 
 Write-Output "Done!"
