@@ -35,8 +35,8 @@ Write-Output "Installing Python..."
 Write-Output "Setting up VSCode..."
 
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json" -OutFile "C:\Users\LAB1223\AppData\Roaming\Code\User\settings.json"
-code --install-extension ms-python.python
-code --install-extension formulahendry.code-runner
-code --install-extension github.github-vscode-theme
+code --install-extension ms-python.python --force
+code --install-extension formulahendry.code-runner --force
+code --install-extension github.github-vscode-theme --force
 
 Write-Output "Done!"
