@@ -35,7 +35,7 @@ Remove-Item $pythonDownloadPath
 
 Write-Output "Setting up VSCode..."
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/settings.json" -OutFile "C:\Users\LAB1223\AppData\Roaming\Code\User\settings.json"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "C:\Users\LAB1223\AppData\Roaming\Code\User\settings.json"
 code --install-extension ms-python.python --force
 code --install-extension formulahendry.code-runner --force
 code --install-extension github.github-vscode-theme --force
