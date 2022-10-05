@@ -2,7 +2,8 @@
 
 ## 04
 
-針對新北市公共自行車即時資訊\
+針對新北市公共自行車即時資訊
+
 顯示空位數量超過 5 的場站資料\
 包含\
 sno：站點代號、sna：場站名稱、tot：場站總停車格、sbi：場站目前車輛數量、ar：地址(中文)、bemp：空位數量
@@ -56,7 +57,8 @@ sno：站點代號、sna：場站名稱、tot：場站總停車格、sbi：場�
 </menu>
 ```
 
-將上面XML菜單存檔 menu.xml\
+將上面XML菜單存檔 menu.xml
+
 讀取 menu.xml
 
 增加宵夜(Night snack) hours: 21-23\
@@ -94,11 +96,13 @@ barbecue: $15
 ```
 
 將上面資料存成 cont.xml 檔案
+
 寫程式讀取 cont.xml
+
 1. 加入新加坡 南邊鄰國 亞特蘭提斯，修改愛爾蘭 gdppc 值 88888，寫入 cont2.xml
-2. 讀出 cont2.xml 將所有相鄰國家列出
-愛爾蘭:英國
-英國:愛爾蘭
+2. 讀出 cont2.xml 將所有相鄰國家列出\
+愛爾蘭:英國\
+英國:愛爾蘭\
 ...
 
 # week02
@@ -200,9 +204,9 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 
 ## 02
 
-查詢台銀牌告匯率\
-找出\
-現金買入和賣出利差最多的前三名
+查詢台銀牌告匯率
+
+找出現金買入和賣出利差最多的前三名
 
 ## 03
 
