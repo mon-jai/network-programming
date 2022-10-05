@@ -72,7 +72,7 @@ barbecue: $15
 
 ## 09
 
-```
+```xml
 <?xml version="1.0"?>
 <data>
 <country name="愛爾蘭">
