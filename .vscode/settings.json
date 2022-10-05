@@ -3,8 +3,8 @@
     "editor.tabSize": 4
   },
   "code-runner.clearPreviousOutput": true,
-  // https://stackoverflow.com/a/53961913
   "code-runner.executorMap": {
+    // https://stackoverflow.com/a/53961913
     "python": "& \"$env:LocalAppData\\Programs\\Python\\Python310\\python\" -u"
   },
   "code-runner.ignoreSelection": true,
