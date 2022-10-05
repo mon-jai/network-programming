@@ -1,4 +1,7 @@
 {
+  "[python]": {
+    "editor.tabSize": 4
+  },
   "code-runner.clearPreviousOutput": true,
   // https://stackoverflow.com/a/53961913
   "code-runner.executorMap": {
