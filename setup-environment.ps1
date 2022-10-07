@@ -30,7 +30,7 @@ Start-BitsTransfer $Matches.url $pythonDownloadPath
 
 Write-Output "Installing Python..."
 
-Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1", "Include_test=0" -NoNewWindow -Wait
+Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "PrependPath=1" -NoNewWindow -Wait
 Remove-Item $pythonDownloadPath
 
 Write-Output "Setting up VSCode..."
