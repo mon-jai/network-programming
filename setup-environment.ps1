@@ -35,6 +35,10 @@ Remove-Item $pythonDownloadPath
 
 Write-Output "Setting up VSCode..."
 
+# https://stackoverflow.com/a/36705460
+# https://stackoverflow.com/a/36751445
+Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
+
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$env:APPDATA\Code\User\settings.json"
 code --install-extension ms-python.python --force
 code --install-extension formulahendry.code-runner --force
