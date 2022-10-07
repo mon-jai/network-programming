@@ -1,7 +1,7 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-$pythonDownloadPath = "$env:USERPROFILE/python.exe"
+$pythonDownloadPath = "$Env:USERPROFILE/python.exe"
 
 Write-Output "Setting language..."
 
@@ -39,7 +39,7 @@ Write-Output "Setting up VSCode..."
 # https://stackoverflow.com/a/36751445
 Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$env:APPDATA\Code\User\settings.json"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$Env:APPDATA\Code\User\settings.json"
 code --install-extension ms-python.python --force
 code --install-extension formulahendry.code-runner --force
 code --install-extension github.github-vscode-theme --force
