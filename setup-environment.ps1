@@ -33,6 +33,9 @@ Write-Output "Installing Python..."
 Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "PrependPath=1" -NoNewWindow -Wait
 Remove-Item $pythonDownloadPath
 
+# https://stackoverflow.com/a/67796873
+pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org
+
 Write-Output "Setting up VSCode..."
 
 # https://stackoverflow.com/a/36705460
