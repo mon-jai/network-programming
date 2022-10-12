@@ -34,7 +34,7 @@ Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "PrependPath=1" -NoN
 Remove-Item $pythonDownloadPath
 
 # https://stackoverflow.com/a/67796873
-pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org
+pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org"
 
 Write-Output "Setting up VSCode..."
 
