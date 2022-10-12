@@ -35,6 +35,7 @@ Remove-Item $pythonDownloadPath
 
 # https://stackoverflow.com/a/67796873
 pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org"
+pip install -U autopep8
 
 Write-Output "Setting up VSCode..."
 
