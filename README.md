@@ -215,3 +215,9 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 查詢三個城市
 
 找出小七店最多個數的街/路前三名
+
+# Cleaning up
+
+```
+Remove-Item "$Env:LOCALAPPDATA\Google\Chrome\User Data\" -Force -Recurse -ErrorAction SilentlyContinue
+```
