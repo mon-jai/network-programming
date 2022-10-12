@@ -218,6 +218,6 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 
 # Cleaning up
 
-```
+```powershell
 Remove-Item "$Env:LOCALAPPDATA\Google\Chrome\User Data\" -Force -Recurse -ErrorAction SilentlyContinue
 ```
