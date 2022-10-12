@@ -1,4 +1,4 @@
-# week01
+# Week 01
 
 ## 04
 
@@ -107,7 +107,7 @@ barbecue: $15
 英國:愛爾蘭\
 ...
 
-# week02
+# Week 02
 
 ## 01
 
@@ -192,7 +192,7 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 計算 2002 年全球人口各國平均數\
 計算 2002 年全球各洲平均壽命、平均財富
 
-# week03
+# Week 03
 
 ## 01
 
@@ -215,6 +215,48 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 查詢三個城市
 
 找出小七店最多個數的街/路前三名
+
+# Week 04
+
+## 04
+
+環保署AQI 公開資料集
+
+輸入城市名稱、PM2.5 值以上
+輸出查詢資料 County, SiteName, AQI, PM2.5 avg, Status
+
+臺北市
+8
+
+SQL 變成字串
+欄位名稱，用雙引號括起來
+```SQL
+SELECT 欄位名稱1,欄位名稱2 #顯示欄位資料
+FROM table_name #哪一個資料庫表格
+WHERE condition1 AND condition2 #過濾條件
+ORDER BY 欄位名稱 #排序欄位
+```
+
+## 05
+
+新北市不動產仲介經紀商業同業公會會員資料查詢
+1. 公司名稱關鍵字
+2. 公司地址關鍵字
+
+input
+1
+產業
+
+output
+列出所有公司名稱有"產業"
+
+input
+2
+中山路
+
+output
+列出所有公司地址有"中山路"
+
 
 # Cleaning up
 
