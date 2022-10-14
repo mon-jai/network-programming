@@ -5,7 +5,7 @@
   "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
     // https://stackoverflow.com/a/53961913
-    "python": "& \"$env:LocalAppData\\Programs\\Python\\Python310\\python\" -u"
+    "python": "clear; & \"$env:LocalAppData\\Programs\\Python\\Python310\\python\" -u"
   },
   "code-runner.ignoreSelection": true,
   "code-runner.runInTerminal": true,
