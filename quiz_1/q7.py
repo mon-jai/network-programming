@@ -42,7 +42,7 @@ earthQuakes.sort(key=cmp_to_key(compare), reverse=True)
 print('地震時間 深度 規模 地震位置')
 print('\n'.join(
     [
-        f'{earthQuake.time} {earthQuake.depth} {earthQuake.intensity} {earthQuake.location}'
+        f'{earthQuake.time} {earthQuake.depth:g} {earthQuake.intensity} {earthQuake.location}'
         for earthQuake in earthQuakes
     ][:3]
 ))
