@@ -6,8 +6,8 @@ from bs4.element import Tag
 
 
 def sort_results(row: tuple[str, str, str]) -> str:
-    match = re.search(r'(?P<city>.*[市縣])', row[2])
-    return f'{match.group("city") if match else row[2]} {row[0]}'
+    match = re.search(r'^.*[市縣]', row[2])
+    return f'{match.group(0) if match else row[2]} {row[0]}'
 
 
 def printRow(row: tuple[str, str, str]):
@@ -16,8 +16,10 @@ def printRow(row: tuple[str, str, str]):
 
 strKeyWords = input()
 
-html = requests.post('https://www.ibon.com.tw/retail_inquiry_ajax.aspx',
-                     data={"strTargetField": "MIXFIELD", "strKeyWords": strKeyWords}).text
+html = requests.post(
+    'https://www.ibon.com.tw/retail_inquiry_ajax.aspx',
+    data={"strTargetField": "MIXFIELD", "strKeyWords": strKeyWords}
+).text
 
 bsObj = BeautifulSoup(html, "lxml")
 table = bsObj.find("table")
@@ -33,5 +35,8 @@ data: list[tuple[str, str, str]] = [
 
 printRow(data[0])
 
-for row in sorted(data[1:], key=sort_results):
+data.pop(0)
+data.sort(key=sort_results)
+
+for row in data:
     printRow(row)
