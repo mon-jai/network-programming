@@ -1,16 +1,24 @@
+from functools import cmp_to_key
 import re
 
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
+def compare(a, b):
+    city_1 = re.search(r'^.*[市縣]', a[2]).group(0)
+    city_2 = re.search(r'^.*[市縣]', b[2]).group(0)
+    door_1 = int(re.search(r'(\d+)號', a[2]).group(1))
+    door_2 = int(re.search(r'(\d+)號', b[2]).group(1))
 
-def sort_results(row: tuple[str, str, str]) -> str:
-    match = re.search(r'^.*[市縣]', row[2])
-    return f'{match.group(0) if match else row[2]} {row[0]}'
+    if city_1 > city_2:
+        return 1 
+    elif city_1 < city_2:
+        return -1
+    else:
+        return 1 if door_1 > door_2 else -1
 
-
-def printRow(row: tuple[str, str, str]):
+def printRow(row):
     print(' '.join(column for column in row))
 
 
@@ -25,7 +33,7 @@ bsObj = BeautifulSoup(html, "lxml")
 table = bsObj.find("table")
 assert isinstance(table, Tag)
 
-data: list[tuple[str, str, str]] = [
+data = [
     (tds[0].text, tds[1].text, tds[2].text)
     for tds in (
         tr.findAll("td")
@@ -36,7 +44,10 @@ data: list[tuple[str, str, str]] = [
 printRow(data[0])
 
 data.pop(0)
-data.sort(key=sort_results)
+data.sort(key=cmp_to_key(compare))
 
 for row in data:
     printRow(row)
+
+
+# 承德路
