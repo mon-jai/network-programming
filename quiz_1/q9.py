@@ -1,14 +1,14 @@
+import enum
 from typing import NamedTuple
 
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
-
 class Winning_Numbers(NamedTuple):
     special_prize_number: str
     first_prize_number: str
-    grand_prize_numbers: list[str]
+    grand_prize_numbers: str
 
 
 def get_prize_number(announcement_url: str):
@@ -18,7 +18,7 @@ def get_prize_number(announcement_url: str):
 
     special_prize_number = ""
     first_prize_number = ""
-    grand_prize_numbers: list[str] = []
+    grand_prize_numbers = []
 
     table = soup.find(id="tenMillionsTable")
     assert isinstance(table, Tag)
@@ -56,7 +56,7 @@ prize_amounts = {
 }
 
 no_of_invoice = int(input())
-invoice_numbers: list[str] = [input() for _ in range(no_of_invoice)]
+invoice_numbers = [input() for _ in range(no_of_invoice)]
 month = int(input())
 total_price = 0
 
@@ -84,16 +84,21 @@ for invoice_number in invoice_numbers:
     elif invoice_number in grand_prize_numbers:
         prize = '頭獎'
     else:
-        no_of_matching_digit = max(
-            sum(
-                1
-                for index, character in enumerate(grand_prize_number_ending)
-                if invoice_number[index] == character
-            )
-            for grand_prize_number_ending in (
-                grand_prize_number for grand_prize_number in grand_prize_numbers
-            )
-        )
+        no_of_matching_digits = []
+
+
+        for grand_prize_number in grand_prize_numbers:
+            no_of_matching_digit = 0
+
+            for index, character in enumerate(grand_prize_number[::-1]):
+                if character == invoice_number[7 - index]:
+                    no_of_matching_digit += 1
+                else:
+                    break
+
+            no_of_matching_digits.append(no_of_matching_digit)
+
+        no_of_matching_digit = max(no_of_matching_digits)
 
         if no_of_matching_digit == 7:
             prize = '二獎'
