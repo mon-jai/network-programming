@@ -8,13 +8,13 @@ from bs4.element import Tag
 
 def extract_city(address: str) -> str:
     result = re.search(r'(?P<city>^.*[市縣])', address)
-    assert isinstance(result, re.Match)
+    assert result is not None
     return result.group('city')
 
 
 def extract_house_number(address: str):
     result = re.search(r'(?P<house_number>\d+)號', address)
-    assert isinstance(result, re.Match)
+    assert result is not None
     return int(result.group('house_number'))
 
 
@@ -29,7 +29,13 @@ def compare(a: tuple[str, str, str], b: tuple[str, str, str]):
     elif city_a < city_b:
         return -1
     else:
-        return 1 if house_number_a > house_number_b else -1
+        return (
+            0
+            if house_number_a == house_number_b
+            else 1
+            if house_number_a > house_number_b
+            else -1
+        )
 
 
 def printRow(row: tuple[str, str, str]):
