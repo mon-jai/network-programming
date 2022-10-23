@@ -5,10 +5,11 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
+
 class Winning_Numbers(NamedTuple):
     special_prize_number: str
     first_prize_number: str
-    grand_prize_numbers: str
+    grand_prize_numbers: list[str]
 
 
 def get_prize_number(announcement_url: str):
@@ -18,7 +19,7 @@ def get_prize_number(announcement_url: str):
 
     special_prize_number = ""
     first_prize_number = ""
-    grand_prize_numbers = []
+    grand_prize_numbers: list[str] = []
 
     table = soup.find(id="tenMillionsTable")
     assert isinstance(table, Tag)
@@ -84,31 +85,30 @@ for invoice_number in invoice_numbers:
     elif invoice_number in grand_prize_numbers:
         prize = '頭獎'
     else:
-        no_of_matching_digits = []
-
+        best_no_of_matching_digits = 0
 
         for grand_prize_number in grand_prize_numbers:
-            no_of_matching_digit = 0
+            no_of_matching_digits = 0
 
-            for index, character in enumerate(grand_prize_number[::-1]):
-                if character == invoice_number[7 - index]:
-                    no_of_matching_digit += 1
+            for index, character in reversed(list(enumerate(grand_prize_number))):
+                if character == invoice_number[index]:
+                    no_of_matching_digits += 1
                 else:
                     break
 
-            no_of_matching_digits.append(no_of_matching_digit)
+            best_no_of_matching_digits = max(
+                best_no_of_matching_digits, no_of_matching_digits
+            )
 
-        no_of_matching_digit = max(no_of_matching_digits)
-
-        if no_of_matching_digit == 7:
+        if best_no_of_matching_digits == 7:
             prize = '二獎'
-        elif no_of_matching_digit == 6:
+        elif best_no_of_matching_digits == 6:
             prize = '三獎'
-        elif no_of_matching_digit == 5:
+        elif best_no_of_matching_digits == 5:
             prize = '四獎'
-        elif no_of_matching_digit == 4:
+        elif best_no_of_matching_digits == 4:
             prize = '五獎'
-        elif no_of_matching_digit == 3:
+        elif best_no_of_matching_digits == 3:
             prize = '六獎'
 
     total_price += prize_amounts[prize]
