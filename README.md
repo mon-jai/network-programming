@@ -377,11 +377,11 @@ sno sna tot sbi\
 臺灣銀行新台幣黃金存摺牌價\
 url='https://www.bot.com.tw/Govinfo/opendata/csv/233/110GoldPassbook.csv'
 
-使用numpy讀取csv檔，\
-(1) 列出本行買入價格最低價的前五筆資訊(日期、本行買入價格、本行賣出價格)\
-(2) 輸出本行買入價格的中位數\
-(3) 輸出本行賣出價格的平均值(四捨五入至小數點後第二位)\
-(4) 輸出本行賣出價格的標準差(四捨五入至小數點後第二位)
+使用numpy讀取csv檔，
+1. 列出本行買入價格最低價的前五筆資訊(日期、本行買入價格、本行賣出價格)
+2. 輸出本行買入價格的中位數
+3. 輸出本行賣出價格的平均值(四捨五入至小數點後第二位)
+4. 輸出本行賣出價格的標準差(四捨五入至小數點後第二位)
 
 Ex.\
 日期 本行買入價格 本行賣出價格\
@@ -400,9 +400,9 @@ Ex.\
 台北市公共自行車即時資訊(json)\
 url='https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json'
 
-使用Pandas將資料轉換為DataFrame，\
-(1) 列出所有場站總停車格(tot)大於80的站點資訊(sno、sna、tot)\
-(2) 統計並列出每區的場站總停車格(tot)總數
+使用Pandas將資料轉換為DataFrame，
+1. 列出所有場站總停車格(tot)大於80的站點資訊(sno、sna、tot)
+2. 統計並列出每區的場站總停車格(tot)總數
 
 Ex.\
 sno sna tot\
