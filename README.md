@@ -1,6 +1,6 @@
-# Week 01
+## Week 01
 
-## 04
+### 04
 
 針對新北市公共自行車即時資訊
 
@@ -9,7 +9,7 @@
 包含\
 sno：站點代號、sna：場站名稱、tot：場站總停車格、sbi：場站目前車輛數量、ar：地址(中文)、bemp：空位數量
 
-## 06
+### 06
 
 針對全國環境輻射偵測即時資訊
 
@@ -29,7 +29,7 @@ sno：站點代號、sna：場站名稱、tot：場站總停車格、sbi：場�
 輸出\
 (121-2, 121+2) ~ (25-2, 25+2) 包含區域的監測站的資料
 
-## 07
+### 07
 
 針對新北市公共自行車即時資訊
 
@@ -41,7 +41,7 @@ sno：站點代號、sna：場站名稱、tot：場站總停車格、sbi：場�
 包含\
 sno：站點代號、sna：場站名稱、tot：場站總停車格、sbi：場站目前車輛數量、ar：地址(中文)、bemp：空位數量
 
-## 08
+### 08
 
 ```xml
 <?xml version="1.0"?>
@@ -70,7 +70,7 @@ barbecue: $15
 
 轉成 json 格式存檔成 menu.json
 
-## 09
+### 09
 
 ```xml
 <?xml version="1.0"?>
@@ -107,16 +107,16 @@ barbecue: $15
 英國:愛爾蘭\
 ...
 
-# Week 02
+## Week 02
 
-## 01
+### 01
 
 載入 pig.csv
 
 輸出全年成交最低平均重量的成交頭數 e.g. 2146\
 輸出全年成交最高平均價格的成交頭數 e.g. 1456
 
-## 02
+### 02
 
 載入 pig.csv
 
@@ -124,7 +124,7 @@ barbecue: $15
 輸出全年成交平均價格的中位數 e.g. 70.82\
 輸出全年成交平均重量的第三個四分位數 124.1
 
-## 03
+### 03
 
 載入 pig.csv
 
@@ -152,7 +152,7 @@ eg.\
 2973\
 2084
 
-## 04
+### 04
 
 使用 Pandas
 
@@ -162,7 +162,7 @@ eg.\
 輸出總統身高，最高前 5 筆資料\
 輸出總統身高 > 180，最低的 5 筆資料
 
-## 05
+### 05
 
 使用 Pandas
 
@@ -183,7 +183,7 @@ e.g.\
 新店區 30\
 板橋區 50
 
-## 06
+### 06
 
 https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 
@@ -192,9 +192,9 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 計算 2002 年全球人口各國平均數\
 計算 2002 年全球各洲平均壽命、平均財富
 
-# Week 03
+## Week 03
 
-## 01
+### 01
 
 隨機亂數產生全班N ( 輸入)位學成績，0~100\
 畫四個子圖，每一個子圖要有標題、刻度、標籤樣式
@@ -204,27 +204,27 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 3. 散射圖 x 分數， y 人數，每 10 分一個區間，自訂一個 mark
 4. 圓餅圖 81~100, 60~80, 0~59 三塊餅
 
-## 02
+### 02
 
 查詢台銀牌告匯率
 
 找出現金買入和賣出利差最多的前三名
 
-## 03
+### 03
 
 查詢三個城市
 
 找出小七店最多個數的街/路前三名
 
-# Week 04
+## Week 04
 
-## 01
+### 01
 
 找台積電股票\
 輸入2個 年期範圍\
 輸出現金股利與加總
 
-## 02
+### 02
 
 輸入一組統一編號\
 輸出是否中二百元，或者差一個號碼中兩百元
@@ -235,7 +235,7 @@ https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx
 1111573\
 差一個號碼中兩百元
 
-## 03
+### 03
 
 中央氣象局-專有名詞中英詞彙對照\
 輸入一個中文字，輸出所有這個中文字的中文、英文對照\
@@ -250,7 +250,7 @@ air\
 air hoar 樹霜
 ...
 
-## 04
+### 04
 
 環保署AQI 公開資料集
 
@@ -270,7 +270,7 @@ WHERE condition1 AND condition2 #過濾條件
 ORDER BY 欄位名稱 #排序欄位
 ```
 
-## 05
+### 05
 
 新北市不動產仲介經紀商業同業公會會員資料查詢
 1. 公司名稱關鍵字
@@ -295,9 +295,9 @@ output
 列出所有公司地址有"中山路"
 
 
-# 小考一
+## 小考一
 
-## 01
+### 01
 
 新北市公共自行車即時資訊(zip)\
 url ='https://data.ntpc.gov.tw/api/datasets/71CD1490-A2DF-4198-BEF1-318479775E8A/csv/zip'
@@ -328,7 +328,7 @@ sno sna bemp\
 1011 二重國中 88\
 1031 捷運景安站 80
 
-## 02
+### 02
 
 新北市電動機車充電站-板橋區(json)\
 url ='https://data.ntpc.gov.tw/api/datasets/1688B7B8-106E-4967-AA38-DBD86D81D495/json/preview'
@@ -345,7 +345,7 @@ sta add no\
 永定機車行 新北市板橋區溪昆二街8號 2\
 來興車業有限公司 新北市板橋區新海路398號 5
 
-## 03
+### 03
 
 新北市公共自行車即時資訊(xml)\
 url ='https://data.ntpc.gov.tw/api/datasets/71CD1490-A2DF-4198-BEF1-318479775E8A/xml/preview'
@@ -372,7 +372,7 @@ sno sna tot sbi\
 1002 汐止火車站 22 18\
 1003 汐止區公所 8 2
 
-## 04
+### 04
 
 臺灣銀行新台幣黃金存摺牌價\
 url='https://www.bot.com.tw/Govinfo/opendata/csv/233/110GoldPassbook.csv'
@@ -395,7 +395,7 @@ Ex.\
 本行賣出價格的平均值：1692.32\
 本行賣出價格的標準差：38.13
 
-## 05
+### 05
 
 台北市公共自行車即時資訊(json)\
 url='https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json'
@@ -415,7 +415,7 @@ sarea total_tot\
 中山區 128\
 南港區 102
 
-## 06
+### 06
 
 依常態分佈隨機產生全1000位學生的身高，mean: 170、standard deviation: 10\
 參考程式碼 : height = np.random.normal(170,10,1000)
@@ -428,7 +428,7 @@ ticks = ['141-145', '146-150', '151-155', '156-160', '161-165', '166-170', '171-
 (2)圓餅圖：標題為”height pie chart”，每10公分為一個區間\
 labels = ["141-150", "151-160", "161-170", "171-180", "181-190", "191-200"]
 
-## 07
+### 07
 
 地震測報中心-全球地震\
 url='https://scweb.cwb.gov.tw/zh-tw/earthquake/world/#'
@@ -442,7 +442,7 @@ Ex.\
 2022/09/24-06:53 12 6.1 墨西哥米卻肯\
 2022/09/24-04:52 48 6.1 印尼巴布亞
 
-## 08
+### 08
 
 ibon便利生活站門市查詢\
 url='https://www.ibon.com.tw/retail_inquiry.aspx'
@@ -471,7 +471,7 @@ outptu：\
 251732 慶東 台南市東區青年路416號\
 903831 日南 台中市大甲區日南里青年路130號
 
-## 09
+### 09
 
 財政部統一發票兌獎網頁
 
@@ -506,7 +506,7 @@ output：\
 total_price：2010000
 
 
-# Cleaning up
+## Cleaning up
 
 ```powershell
 Remove-Item "$Env:LOCALAPPDATA\Google\Chrome\User Data\" -Force -Recurse -ErrorAction SilentlyContinue
