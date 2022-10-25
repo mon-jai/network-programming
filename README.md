@@ -509,5 +509,5 @@ total_price：2010000
 ## Cleaning up
 
 ```powershell
-Remove-Item "$Env:LOCALAPPDATA\Google\Chrome\User Data\" -Force -Recurse -ErrorAction SilentlyContinue
+Remove-Item "$Env:LOCALAPPDATA\Google\Chrome\User Data\" -Force -Recurse
 ```
