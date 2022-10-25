@@ -508,6 +508,7 @@ total_price：2010000
 
 ## Cleaning up
 
+<!-- https://stackoverflow.com/a/69547616 -->
 ```powershell
-Remove-Item "$Env:LOCALAPPDATA\Google\Chrome\User Data\" -Force -Recurse -ErrorAction SilentlyContinue
+(New-Object -ComObject scripting.filesystemobject).DeleteFolder("$Env:LOCALAPPDATA\Google\Chrome\User Data\")
 ```
