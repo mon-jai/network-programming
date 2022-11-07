@@ -1,7 +1,6 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-
 Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/51374938
   Set-Culture en-US
