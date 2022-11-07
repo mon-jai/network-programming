@@ -1,7 +1,6 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-$pythonDownloadPath = "$Env:USERPROFILE/python.exe"
 
 Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/51374938
@@ -18,9 +17,11 @@ Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
 }
 
 Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
+  $pythonDownloadPath = "$Env:USERPROFILE/python.exe"
+
   # https://stackoverflow.com/a/73534796
   if (
-    (Invoke-RestMethod 'https://www.python.org/downloads/') -notmatch 
+    (Invoke-RestMethod 'https://www.python.org/downloads/') -notmatch
     '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
   ) { throw "Could not determine latest Python version and download URL" }
 
