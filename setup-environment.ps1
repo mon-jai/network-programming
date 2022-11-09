@@ -32,9 +32,9 @@ Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   Remove-Item $pythonDownloadPath
 
   # https://stackoverflow.com/a/67796873
-  pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org"
-  pip install -U pip
-  pip install -U autopep8
+  & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } *>$null
+  & { python -m pip install --upgrade pip } *>$null
+  & { pip install -U autopep8 } *>$null
 
   Write-Information "Install Python completed"
 }
