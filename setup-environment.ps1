@@ -46,9 +46,9 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
 
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$Env:APPDATA\Code\User\settings.json"
 
-  & { code --install-extension --force ms-python.python } *>$null
-  & { code --install-extension --force formulahendry.code-runner } *>$null
-  & { code --install-extension --force github.github-vscode-theme } *>$null
+  & { code --install-extension ms-python.python --force } *>$null
+  & { code --install-extension formulahendry.code-runner --force } *>$null
+  & { code --install-extension github.github-vscode-theme --force } *>$null
 
   Write-Information "Setup VSCode completed"
 }
