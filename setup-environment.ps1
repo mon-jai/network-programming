@@ -1,7 +1,7 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-Start-Job -Name 'Setup language' -ScriptBlock {
+Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/51374938
   Set-Culture en-US
   Set-WinSystemLocale -SystemLocale en-US
@@ -15,7 +15,7 @@ Start-Job -Name 'Setup language' -ScriptBlock {
   Write-Information "Setup language completed"
 }
 
-Start-Job -Name 'Install Python' -ScriptBlock {
+Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   $pythonDownloadPath = "$Env:USERPROFILE/python.exe"
 
   # https://stackoverflow.com/a/73534796
@@ -33,24 +33,25 @@ Start-Job -Name 'Install Python' -ScriptBlock {
 
   # https://stackoverflow.com/a/67796873
   pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org"
+  pip install -U pip
   pip install -U autopep8
 
   Write-Information "Install Python completed"
 }
 
-Start-Job -Name 'Setup VSCode' -ScriptBlock {
+Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/36705460
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
 
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$Env:APPDATA\Code\User\settings.json"
 
-  code --install-extension ms-python.python --force
-  code --install-extension formulahendry.code-runner --force
-  code --install-extension github.github-vscode-theme --force
+  & { code --install-extension --force ms-python.python } *>$null
+  & { code --install-extension --force formulahendry.code-runner } *>$null
+  & { code --install-extension --force github.github-vscode-theme } *>$null
 
   Write-Information "Setup VSCode completed"
 }
 
-Get-Job | Receive-Job -Wait | Out-Null
+Get-Job | Receive-Job -Wait -ErrorAction Stop
 Write-Information "Done!"
