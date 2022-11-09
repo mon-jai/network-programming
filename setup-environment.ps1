@@ -12,7 +12,7 @@ Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   $languageList[1].InputMethodTips.Clear()
   $languageList[1].InputMethodTips.Add('0404:{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}{4BDF9F03-C7D3-11D4-B2AB-0080C882687E}')
   Set-WinUserLanguageList $languageList -Force
-  Write-Information "Setup language completed"
+  Write-Host "Setup language completed"
 }
 
 Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
@@ -36,7 +36,7 @@ Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   & { python -m pip install --upgrade pip } *>$null
   & { pip install -U autopep8 } *>$null
 
-  Write-Information "Install Python completed"
+  Write-Host "Install Python completed"
 }
 
 Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
@@ -50,8 +50,8 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
   & { code --install-extension formulahendry.code-runner --force } *>$null
   & { code --install-extension github.github-vscode-theme --force } *>$null
 
-  Write-Information "Setup VSCode completed"
+  Write-Host "Setup VSCode completed"
 }
 
 Get-Job | Receive-Job -Wait -ErrorAction Stop
-Write-Information "Done!"
+Write-Host "Done!"
