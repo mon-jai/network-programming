@@ -1,7 +1,7 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Setup language' -ScriptBlock {
   # https://stackoverflow.com/a/51374938
   Set-Culture en-US
   Set-WinSystemLocale -SystemLocale en-US
@@ -15,7 +15,7 @@ Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   Write-Information "Setup language completed"
 }
 
-Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Install Python' -ScriptBlock {
   $pythonDownloadPath = "$Env:USERPROFILE/python.exe"
 
   # https://stackoverflow.com/a/73534796
@@ -38,7 +38,7 @@ Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   Write-Information "Install Python completed"
 }
 
-Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Setup VSCode' -ScriptBlock {
   # https://stackoverflow.com/a/36705460
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
@@ -52,5 +52,5 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
   Write-Information "Setup VSCode completed"
 }
 
-Get-Job | Receive-Job -Wait -ErrorAction Stop
+Get-Job | Receive-Job -Wait
 Write-Information "Done!"
