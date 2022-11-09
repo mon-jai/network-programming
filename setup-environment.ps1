@@ -52,5 +52,5 @@ Start-Job -Name 'Setup VSCode' -ScriptBlock {
   Write-Information "Setup VSCode completed"
 }
 
-Get-Job | Receive-Job -Wait
+Get-Job | Receive-Job -Wait | Out-Null
 Write-Information "Done!"
