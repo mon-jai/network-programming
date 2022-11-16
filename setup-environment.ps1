@@ -32,9 +32,9 @@ Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   Remove-Item $pythonDownloadPath
 
   # https://stackoverflow.com/a/67796873
-  & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } &>$null
-  & { python -m pip install --upgrade pip } &>$null
-  & { pip install -U autopep8 } &>$null
+  & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } > $null
+  & { python -m pip install --upgrade pip } > $null
+  & { pip install -U autopep8 } > $null
 
   Write-Host "Install Python completed"
 }
@@ -46,9 +46,9 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
 
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$Env:APPDATA\Code\User\settings.json"
 
-  & { code --install-extension ms-python.python --force } *>$null
-  & { code --install-extension formulahendry.code-runner --force } *>$null
-  & { code --install-extension github.github-vscode-theme --force } *>$null
+  & { code --install-extension ms-python.python --force } *> $null
+  & { code --install-extension formulahendry.code-runner --force } *> $null
+  & { code --install-extension github.github-vscode-theme --force } *> $null
 
   Write-Host "Setup VSCode completed"
 }
