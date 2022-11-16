@@ -16,7 +16,7 @@ Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
 }
 
 Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
-  $pythonDownloadPath = "$Env:USERPROFILE/python.exe"
+  $pythonDownloadPath = "$Env:TEMP/python.exe"
 
   # https://stackoverflow.com/a/73534796
   if (
@@ -32,9 +32,9 @@ Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   Remove-Item $pythonDownloadPath
 
   # https://stackoverflow.com/a/67796873
-  & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } *>$null
-  & { python -m pip install --upgrade pip } *>$null
-  & { pip install -U autopep8 } *>$null
+  & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } &>$null
+  & { python -m pip install --upgrade pip } &>$null
+  & { pip install -U autopep8 } &>$null
 
   Write-Host "Install Python completed"
 }
