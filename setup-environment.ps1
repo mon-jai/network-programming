@@ -16,7 +16,7 @@ Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   Write-Host "Setup language completed"
 }
 
-Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Install and setup Python' -ErrorAction Stop -ScriptBlock {
   $pythonDownloadPath = "$Env:TEMP/python.exe"
 
   # https://stackoverflow.com/a/73534796
@@ -37,7 +37,7 @@ Start-Job -Name 'Install Python' -ErrorAction Stop -ScriptBlock {
   & { python -m pip install --upgrade pip } > $null
   & { pip install -U autopep8 } > $null
 
-  Write-Host "Install Python completed"
+  Write-Host "Install and setup Python completed"
 }
 
 Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
@@ -45,7 +45,30 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
 
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mon-jai/network-programming/main/.vscode/settings.json" -OutFile "$Env:APPDATA\Code\User\settings.json"
+  $vscode_settings = [pscustomobject]@{
+    "[python]"                         = [pscustomobject]@{
+      "editor.tabSize" = 4
+    }
+    "code-runner.clearPreviousOutput"  = true
+    "code-runner.executorMap"          = [pscustomobject]@{
+      # https://stackoverflow.com/a/53961913
+      "python" = "clear; & `"`$env:LocalAppData\Programs\Python\Python311\python`" -u"
+    }
+    "code-runner.ignoreSelection"      = true
+    "code-runner.runInTerminal"        = true
+    "code-runner.saveFileBeforeRun"    = true
+    "editor.tabSize"                   = 2
+    "explorer.confirmDelete"           = false
+    "files.associations"               = [pscustomobject]@{
+      "*.xml" = "html"
+    }
+    "http.proxyStrictSSL"              = false
+    "python.analysis.typeCheckingMode" = "strict"
+    "workbench.colorTheme"             = "GitHub Light Default"
+    "workbench.startupEditor"          = "none"
+  }
+
+  ConvertTo-Json -InputObject $vscode_settings -OutFile "$Env:APPDATA\Code\User\settings.json"
 
   & { code --install-extension ms-python.python --force } *> $null
   & { code --install-extension formulahendry.code-runner --force } *> $null
