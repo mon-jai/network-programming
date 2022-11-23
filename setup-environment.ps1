@@ -49,26 +49,26 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
     "[python]"                         = [pscustomobject]@{
       "editor.tabSize" = 4
     }
-    "code-runner.clearPreviousOutput"  = true
+    "code-runner.clearPreviousOutput"  = $true
     "code-runner.executorMap"          = [pscustomobject]@{
       # https://stackoverflow.com/a/53961913
       "python" = "clear; & `"`$env:LocalAppData\Programs\Python\Python311\python`" -u"
     }
-    "code-runner.ignoreSelection"      = true
-    "code-runner.runInTerminal"        = true
-    "code-runner.saveFileBeforeRun"    = true
+    "code-runner.ignoreSelection"      = $true
+    "code-runner.runInTerminal"        = $true
+    "code-runner.saveFileBeforeRun"    = $true
     "editor.tabSize"                   = 2
-    "explorer.confirmDelete"           = false
+    "explorer.confirmDelete"           = $false
     "files.associations"               = [pscustomobject]@{
       "*.xml" = "html"
     }
-    "http.proxyStrictSSL"              = false
+    "http.proxyStrictSSL"              = $false
     "python.analysis.typeCheckingMode" = "strict"
     "workbench.colorTheme"             = "GitHub Light Default"
     "workbench.startupEditor"          = "none"
   }
 
-  ConvertTo-Json -InputObject $vscode_settings -OutFile "$Env:APPDATA\Code\User\settings.json"
+  ConvertTo-Json -InputObject $vscode_settings | Out-File -Encoding "UTF8" "$Env:APPDATA\Code\User\settings.json"
 
   & { code --install-extension ms-python.python --force } *> $null
   & { code --install-extension formulahendry.code-runner --force } *> $null
