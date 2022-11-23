@@ -45,7 +45,7 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
 
-  $vscode_settings = [pscustomobject]@{
+  $vscodeSettings = [pscustomobject]@{
     "[python]"                         = [pscustomobject]@{
       "editor.tabSize" = 4
     }
@@ -68,7 +68,7 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
     "workbench.startupEditor"          = "none"
   }
 
-  ConvertTo-Json -InputObject $vscode_settings | Out-File -Encoding "UTF8" "$Env:APPDATA\Code\User\settings.json"
+  ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$Env:APPDATA\Code\User\settings.json"
 
   & { code --install-extension ms-python.python --force } *> $null
   & { code --install-extension formulahendry.code-runner --force } *> $null
