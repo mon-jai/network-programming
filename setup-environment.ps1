@@ -1,13 +1,13 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-Start-Job -Name 'Enable clipboard' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Enable clipboard' -ScriptBlock {
   & { new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force } > $null
 
   Write-Host "Enabled clipboard"
 }
 
-Start-Job -Name 'Configure language' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Configure language' -ScriptBlock {
   # https://stackoverflow.com/a/51374938
   Set-Culture en-US
   Set-WinSystemLocale -SystemLocale en-US
@@ -22,7 +22,7 @@ Start-Job -Name 'Configure language' -ErrorAction Stop -ScriptBlock {
   Write-Host "Configured language"
 }
 
-Start-Job -Name 'Install and configure Python' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Install and configure Python' -ScriptBlock {
   $pythonDownloadPath = "$Env:TEMP/python.exe"
 
   # https://stackoverflow.com/a/73534796
@@ -46,7 +46,7 @@ Start-Job -Name 'Install and configure Python' -ErrorAction Stop -ScriptBlock {
   Write-Host "Installed and configured Python"
 }
 
-Start-Job -Name 'Configure VSCode' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Configure VSCode' -ScriptBlock {
   # https://stackoverflow.com/a/36705460
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
