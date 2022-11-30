@@ -2,7 +2,7 @@
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
 Start-Job -Name 'Enabling clipboard' -ErrorAction Stop -ScriptBlock {
-  new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force
+  & { new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force } > $null
 
   Write-Host "Enabled clipboard"
 }
