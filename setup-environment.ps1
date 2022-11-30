@@ -1,7 +1,13 @@
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
 
-Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Enabling clipboard' -ErrorAction Stop -ScriptBlock {
+  new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force
+
+  Write-Host "Enabled clipboard"
+}
+
+Start-Job -Name 'Configuring language' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/51374938
   Set-Culture en-US
   Set-WinSystemLocale -SystemLocale en-US
@@ -13,10 +19,10 @@ Start-Job -Name 'Setup language' -ErrorAction Stop -ScriptBlock {
   $languageList[1].InputMethodTips.Add('0404:{531FDEBF-9B4C-4A43-A2AA-960E8FCDC732}{4BDF9F03-C7D3-11D4-B2AB-0080C882687E}')
   Set-WinUserLanguageList $languageList -Force
 
-  Write-Host "Setup language completed"
+  Write-Host "Configured language"
 }
 
-Start-Job -Name 'Install and setup Python' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Installing and configuring Python' -ErrorAction Stop -ScriptBlock {
   $pythonDownloadPath = "$Env:TEMP/python.exe"
 
   # https://stackoverflow.com/a/73534796
@@ -37,10 +43,10 @@ Start-Job -Name 'Install and setup Python' -ErrorAction Stop -ScriptBlock {
   & { python -m pip install --upgrade pip } > $null
   & { pip install -U autopep8 } > $null
 
-  Write-Host "Install and setup Python completed"
+  Write-Host "Installed and configured Python"
 }
 
-Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
+Start-Job -Name 'Configuring VSCode' -ErrorAction Stop -ScriptBlock {
   # https://stackoverflow.com/a/36705460
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
@@ -74,7 +80,7 @@ Start-Job -Name 'Setup VSCode' -ErrorAction Stop -ScriptBlock {
   & { code --install-extension formulahendry.code-runner --force } *> $null
   & { code --install-extension github.github-vscode-theme --force } *> $null
 
-  Write-Host "Setup VSCode completed"
+  Write-Host "Configured VSCode"
 }
 
 Get-Job | Receive-Job -Wait -ErrorAction Stop
