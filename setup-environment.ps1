@@ -35,7 +35,8 @@ Start-Job -Name 'Install and configure Python' -ScriptBlock {
   Import-Module BitsTransfer
   Start-BitsTransfer $Matches.url $pythonDownloadPath
 
-  Start-Process "$pythonDownloadPath" -ArgumentList "/quiet", "PrependPath=1" -NoNewWindow -Wait
+  # https://stackoverflow.com/a/73665900
+  Start-Process $pythonDownloadPath -ArgumentList "/quiet", "PrependPath=1", "InstallLauncherAllUsers=0" -NoNewWindow -Wait
   Remove-Item $pythonDownloadPath
 
   # https://stackoverflow.com/a/67796873
