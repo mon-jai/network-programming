@@ -7,7 +7,8 @@ Start-Job -Name 'Enable clipboard' -ScriptBlock {
     new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop
 
     Write-Host "Enabled clipboard"
-  } catch { }
+  }
+  catch { }
 }
 
 Start-Job -Name 'Configure language' -ScriptBlock {
