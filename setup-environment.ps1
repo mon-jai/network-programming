@@ -8,7 +8,9 @@ Start-Job -Name 'Enable clipboard' -ScriptBlock {
 
     Write-Host "Enabled clipboard"
   }
-  catch { }
+  catch {
+    Write-Host "Enable clipboard skipped"
+  }
 }
 
 Start-Job -Name 'Configure language' -ScriptBlock {
