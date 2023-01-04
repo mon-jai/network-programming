@@ -11,7 +11,7 @@ Import-Module BitsTransfer
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
     # https://stackoverflow.com/a/41476689
-    . { new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop } *> $null
+    & { new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop } *> $null
 
     Write-Host "Enabled clipboard"
   }
@@ -46,8 +46,8 @@ Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
   Start-BitsTransfer  $windowsTerminalDownloadURL $windowsTerminalDownloadPath
   
   try {
-    . { Add-AppxPackage $desktopFrameworkPackageDownloadPath } *> $null
-    . { Add-AppxPackage $windowsTerminalDownloadPath } *> $null
+    & { Add-AppxPackage $desktopFrameworkPackageDownloadPath } *> $null
+    & { Add-AppxPackage $windowsTerminalDownloadPath } *> $null
 
     Write-Host "Installed Windows Terminal"
   }
@@ -112,11 +112,11 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
 
   ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$Env:APPDATA\Code\User\settings.json"
 
-  . { code --install-extension formulahendry.code-runner --force } *> $null
-  . { code --install-extension github.github-vscode-theme --force } *> $null
+  & { code --install-extension formulahendry.code-runner --force } *> $null
+  & { code --install-extension github.github-vscode-theme --force } *> $null
   
   if ($InstallPython) {
-    . { code --install-extension ms-python.python --force } *> $null
+    & { code --install-extension ms-python.python --force } *> $null
   }
 
   Write-Host "Configured VSCode"
