@@ -11,7 +11,8 @@ Import-Module BitsTransfer
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
     # https://stackoverflow.com/a/41476689
-    & { new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop } *> $null
+    # https://stackoverflow.com/a/11969703
+    New-ItemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop *>&1 | Out-Null
 
     Write-Host "Enabled clipboard"
   }
@@ -46,8 +47,8 @@ Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
   Start-BitsTransfer  $windowsTerminalDownloadURL $windowsTerminalDownloadPath
   
   try {
-    & { Add-AppxPackage $desktopFrameworkPackageDownloadPath -ErrorAction Stop } *> $null
-    & { Add-AppxPackage $windowsTerminalDownloadPath -ErrorAction Stop } *> $null
+    Add-AppxPackage $desktopFrameworkPackageDownloadPath -ErrorAction Stop *>&1 | Out-Null
+    Add-AppxPackage $windowsTerminalDownloadPath -ErrorAction Stop *>&1 | Out-Null
 
     Write-Host "Installed Windows Terminal"
   }
@@ -74,9 +75,9 @@ if ($InstallPython) {
     Remove-Item $pythonDownloadPath
 
     # https://stackoverflow.com/a/67796873
-    & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } > $null
-    & { python -m pip install --upgrade pip } > $null
-    & { pip install -U autopep8 } > $null
+    pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" | Out-Null
+    python -m pip install --upgrade pip | Out-Null
+    pip install -U autopep8 | Out-Null
 
     Write-Host "Installed and configured Python"
   }
@@ -112,14 +113,14 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
   }
 
   # Throw an error if the directory already exists
-  New-Item $vscodeSettingsDir -ItemType Directory -ErrorAction SilentlyContinue
+  New-Item $vscodeSettingsDir -ItemType Directory -ErrorAction SilentlyContinue *>&1 | Out-Null
   ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$vscodeSettingsDir\settings.json"
 
-  & { code --install-extension formulahendry.code-runner --force } *> $null
-  & { code --install-extension github.github-vscode-theme --force } *> $null
+  code --install-extension formulahendry.code-runner --force *>&1 | Out-Null
+  code --install-extension github.github-vscode-theme --force *>&1 | Out-Null
   
   if ($InstallPython) {
-    & { code --install-extension ms-python.python --force } *> $null
+    code --install-extension ms-python.python --force *>&1 | Out-Null
   }
 
   Write-Host "Configured VSCode"
