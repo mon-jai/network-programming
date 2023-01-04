@@ -8,7 +8,7 @@ Import-Module BitsTransfer
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
     # https://stackoverflow.com/a/41476689
-    new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop
+    & { new-itemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop } *> $null
 
     Write-Host "Enabled clipboard"
   }
