@@ -4,7 +4,7 @@ Param([switch]$InstallPython)
 
 # Throw an error when "the setting is overridden by a policy defined at a more specific scope", https://stackoverflow.com/a/60549569
 # https://stackoverflow.com/a/68777742
-# . { Set-ExecutionPolicy Bypass -Scope Process -Force } *> $null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
+# Set-ExecutionPolicy Bypass -Scope Process -Force *>&1 | Out-Null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
 
