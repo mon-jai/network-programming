@@ -1,5 +1,9 @@
 # https://stackoverflow.com/a/43905715
-# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))
+# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1')) -ArgumentList "", ""
+
+Import-Module BitsTransfer
+
+Param([switch]$InstallPython)
 
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
@@ -28,29 +32,46 @@ Start-Job -Name 'Configure language' -ScriptBlock {
   Write-Host "Configured language"
 }
 
-Start-Job -Name 'Install and configure Python' -ScriptBlock {
-  $pythonDownloadPath = "$Env:TEMP/python.exe"
+Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
+  $desktopFrameworkPackageDownloadURL = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+  $desktopFrameworkPackageDownloadPath = "$Env:TEMP/VCLibs.appx"
 
-  # https://stackoverflow.com/a/73534796
-  if (
+  $windowsTerminalDownloadURL = "https://github.com/microsoft/terminal/releases/download/v1.15.3465.0/Microsoft.WindowsTerminal_Win10_1.15.3465.0_8wekyb3d8bbwe.msixbundle"
+  $windowsTerminalDownloadPath = "$Env:TEMP/WindowsTerminal.msixbundle"
+
+  Start-BitsTransfer  $desktopFrameworkPackageDownloadURL $ desktopFrameworkPackageDownloadPath
+  Start-BitsTransfer  $windowsTerminalDownloadURL $ windowsTerminalDownloadPath
+  
+  Add-AppxPackage $desktopFrameworkPackageDownloadPath
+  Add-AppxPackage $windowsTerminalDownloadPath
+
+  Write-Host "Installed Windows Terminal"
+}
+
+if ($InstallPython) {
+  Start-Job -Name 'Install and configure Python' -ScriptBlock {
+    $pythonDownloadPath = "$Env:TEMP/python.exe"
+
+    # https://stackoverflow.com/a/73534796
+    if (
     (Invoke-RestMethod 'https://www.python.org/downloads/') -notmatch
-    '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
-  ) { throw "Could not determine latest Python version and download URL" }
+      '\bhref="(?<url>.+?\.exe)"\s*>\s*Download Python (?<version>\d+\.\d+\.\d+)'
+    ) { throw "Could not determine latest Python version and download URL" }
 
-  # https://stackoverflow.com/a/21423159
-  Import-Module BitsTransfer
-  Start-BitsTransfer $Matches.url $pythonDownloadPath
+    # https://stackoverflow.com/a/21423159
+    Start-BitsTransfer $Matches.url $pythonDownloadPath
 
-  # https://stackoverflow.com/a/73665900
-  Start-Process $pythonDownloadPath -ArgumentList "/quiet", "PrependPath=1", "InstallLauncherAllUsers=0" -NoNewWindow -Wait
-  Remove-Item $pythonDownloadPath
+    # https://stackoverflow.com/a/73665900
+    Start-Process $pythonDownloadPath -ArgumentList "/quiet", "PrependPath=1", "InstallLauncherAllUsers=0" -NoNewWindow -Wait
+    Remove-Item $pythonDownloadPath
 
-  # https://stackoverflow.com/a/67796873
-  & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } > $null
-  & { python -m pip install --upgrade pip } > $null
-  & { pip install -U autopep8 } > $null
+    # https://stackoverflow.com/a/67796873
+    & { pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" } > $null
+    & { python -m pip install --upgrade pip } > $null
+    & { pip install -U autopep8 } > $null
 
-  Write-Host "Installed and configured Python"
+    Write-Host "Installed and configured Python"
+  }
 }
 
 Start-Job -Name 'Configure VSCode' -ScriptBlock {
@@ -83,12 +104,15 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
 
   ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$Env:APPDATA\Code\User\settings.json"
 
-  & { code --install-extension ms-python.python --force } *> $null
   & { code --install-extension formulahendry.code-runner --force } *> $null
   & { code --install-extension github.github-vscode-theme --force } *> $null
+  
+  if ($InstallPython) { & { code --install-extension ms-python.python --force } *> $null }
 
   Write-Host "Configured VSCode"
 }
+
+
 
 Get-Job | Receive-Job -Wait -ErrorAction Stop
 Write-Host "Done!"
