@@ -46,10 +46,11 @@ Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
   Start-BitsTransfer  $windowsTerminalDownloadURL $windowsTerminalDownloadPath
   
   try {
-    & { Add-AppxPackage $desktopFrameworkPackageDownloadPath -ErrorAction Stop } *> $null
-    & { Add-AppxPackage $windowsTerminalDownloadPath -ErrorAction Stop } *> $null
+    & { Add-AppxPackage $desktopFrameworkPackageDownloadPath } *> $null
+    & { Add-AppxPackage $windowsTerminalDownloadPath } *> $null
 
     Write-Host "Installed Windows Terminal"
+  }
   catch {
     Write-Host "Install Windows Terminal skipped"
   }
