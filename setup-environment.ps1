@@ -39,7 +39,7 @@ Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
   $windowsTerminalDownloadURL = "https://github.com/microsoft/terminal/releases/download/v1.15.3465.0/Microsoft.WindowsTerminal_Win10_1.15.3465.0_8wekyb3d8bbwe.msixbundle"
   $windowsTerminalDownloadPath = "$Env:TEMP/WindowsTerminal.msixbundle"
 
-  Start-BitsTransfer  $desktopFrameworkPackageDownloadURL $ desktopFrameworkPackageDownloadPath
+  Start-BitsTransfer  $desktopFrameworkPackageDownloadURL $desktopFrameworkPackageDownloadPath
   Start-BitsTransfer  $windowsTerminalDownloadURL $ windowsTerminalDownloadPath
   
   Add-AppxPackage $desktopFrameworkPackageDownloadPath
