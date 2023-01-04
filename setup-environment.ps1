@@ -3,15 +3,15 @@ Param([switch]$InstallPython)
 # Copyright 2022 Loh Ka Hong | Licensed under MIT
 
 # Throw an error when "the setting is overridden by a policy defined at a more specific scope", https://stackoverflow.com/a/60549569
-# Redirect stderr to stdout, and drop the output, https://stackoverflow.com/a/11969703
 # https://stackoverflow.com/a/68777742
-# Set-ExecutionPolicy Bypass -Scope Process -Force *>&1 | Out-Null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
+# . { Set-ExecutionPolicy Bypass -Scope Process -Force } *> $null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
 
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
     # https://stackoverflow.com/a/41476689
+    # Redirect stderr to stdout, and drop the output, https://stackoverflow.com/a/11969703
     New-ItemProperty -path 'HKCU:\Software\Microsoft\Clipboard' -name EnableClipboardHistory -propertyType DWord -value 1 -force -ErrorAction Stop *>&1 | Out-Null
 
     Write-Host "Enabled clipboard"
