@@ -1,9 +1,9 @@
+Param([switch]$InstallPython)
+
 # https://stackoverflow.com/a/43905715
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1')) -ArgumentList "-InstallPython"
 
 Import-Module BitsTransfer
-
-Param([switch]$InstallPython)
 
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
@@ -111,8 +111,6 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
 
   Write-Host "Configured VSCode"
 }
-
-
 
 Get-Job | Receive-Job -Wait -ErrorAction Stop
 Write-Host "Done!"
