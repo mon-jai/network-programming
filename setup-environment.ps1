@@ -75,8 +75,8 @@ if ($InstallPython) {
     Start-Process $pythonDownloadPath -ArgumentList "/quiet", "PrependPath=1", "InstallLauncherAllUsers=0" -NoNewWindow -Wait
     Remove-Item $pythonDownloadPath
 
-    # Reload PATH to run python and pip, https://stackoverflow.com/a/17794885
-    $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    # Reload PATH to run python and pip, https://stackoverflow.com/a/31845512
+    $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User") 
 
     # https://stackoverflow.com/a/67796873
     pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" | Out-Null
