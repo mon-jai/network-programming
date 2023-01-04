@@ -1,6 +1,7 @@
 Param([switch]$InstallPython)
 
 # https://stackoverflow.com/a/68777742
+# https://stackoverflow.com/a/40491432
 # Set-ExecutionPolicy Bypass -Scope Process -Force; & ([scriptblock]::Create((iwr -useb 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
