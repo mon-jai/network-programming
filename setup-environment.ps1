@@ -1,5 +1,5 @@
 # https://stackoverflow.com/a/43905715
-# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1')) -ArgumentList "", ""
+# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1')) -ArgumentList "-InstallPython"
 
 Import-Module BitsTransfer
 
