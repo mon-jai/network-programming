@@ -74,7 +74,7 @@ if ($InstallPython) {
     Start-Process $pythonDownloadPath -ArgumentList "/quiet", "PrependPath=1", "InstallLauncherAllUsers=0" -NoNewWindow -Wait
     Remove-Item $pythonDownloadPath
 
-    # Reload PATH, https://stackoverflow.com/a/17794885
+    # Reload PATH to run python and pip, https://stackoverflow.com/a/17794885
     $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 
     # https://stackoverflow.com/a/67796873
