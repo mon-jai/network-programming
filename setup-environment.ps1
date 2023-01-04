@@ -111,7 +111,7 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
     "workbench.startupEditor"          = "none"
   }
 
-  New-Item $vscodeSettingsDir -ItemType Directory -Force
+  & { New-Item $vscodeSettingsDir -ItemType Directory -Force } > $null
   ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$vscodeSettingsDir\settings.json"
 
   & { code --install-extension formulahendry.code-runner --force } *> $null
