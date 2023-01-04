@@ -4,7 +4,7 @@ Param([switch]$InstallPython)
 
 # https://stackoverflow.com/a/68777742
 # https://stackoverflow.com/a/40491432
-# Set-ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
+# . { Set-ExecutionPolicy Bypass -Scope Process -Force } *> $null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
 
@@ -111,7 +111,7 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
     "workbench.startupEditor"          = "none"
   }
 
-  New-Item $vscodeSettingsDir -ItemType Directory
+  New-Item $vscodeSettingsDir -ItemType Directory -Force
   ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$vscodeSettingsDir\settings.json"
 
   & { code --install-extension formulahendry.code-runner --force } *> $null
