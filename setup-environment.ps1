@@ -37,26 +37,26 @@ Start-Job -Name 'Configure language' -ScriptBlock {
   Write-Host "Configured language"
 }
 
-Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
-  $desktopFrameworkPackageDownloadURL = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
-  $desktopFrameworkPackageDownloadPath = "$Env:TEMP/VCLibs.appx"
+# Start-Job -Name 'Install Windows Terminal' -ScriptBlock {
+#   $desktopFrameworkPackageDownloadURL = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+#   $desktopFrameworkPackageDownloadPath = "$Env:TEMP/VCLibs.appx"
 
-  $windowsTerminalDownloadURL = "https://github.com/microsoft/terminal/releases/download/v1.15.3465.0/Microsoft.WindowsTerminal_Win10_1.15.3465.0_8wekyb3d8bbwe.msixbundle"
-  $windowsTerminalDownloadPath = "$Env:TEMP/WindowsTerminal.msixbundle"
+#   $windowsTerminalDownloadURL = "https://github.com/microsoft/terminal/releases/download/v1.15.3465.0/Microsoft.WindowsTerminal_Win10_1.15.3465.0_8wekyb3d8bbwe.msixbundle"
+#   $windowsTerminalDownloadPath = "$Env:TEMP/WindowsTerminal.msixbundle"
 
-  Start-BitsTransfer  $desktopFrameworkPackageDownloadURL $desktopFrameworkPackageDownloadPath
-  Start-BitsTransfer  $windowsTerminalDownloadURL $windowsTerminalDownloadPath
+#   Start-BitsTransfer  $desktopFrameworkPackageDownloadURL $desktopFrameworkPackageDownloadPath
+#   Start-BitsTransfer  $windowsTerminalDownloadURL $windowsTerminalDownloadPath
   
-  try {
-    Add-AppxPackage $desktopFrameworkPackageDownloadPath -ErrorAction Stop *>&1 | Out-Null
-    Add-AppxPackage $windowsTerminalDownloadPath -ErrorAction Stop *>&1 | Out-Null
+#   try {
+#     Add-AppxPackage $desktopFrameworkPackageDownloadPath -ErrorAction Stop *>&1 | Out-Null
+#     Add-AppxPackage $windowsTerminalDownloadPath -ErrorAction Stop *>&1 | Out-Null
 
-    Write-Host "Installed Windows Terminal"
-  }
-  catch {
-    Write-Host "Install Windows Terminal skipped"
-  }
-}
+#     Write-Host "Installed Windows Terminal"
+#   }
+#   catch {
+#     Write-Host "Install Windows Terminal skipped"
+#   }
+# }
 
 if ($InstallPython) {
   Start-Job -Name 'Install and configure Python' -ScriptBlock {
@@ -77,6 +77,7 @@ if ($InstallPython) {
 
     # Reload PATH to run python and pip, https://stackoverflow.com/a/31845512
     $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User") 
+    echo $Env:Path;
 
     # https://stackoverflow.com/a/67796873
     pip config set global.trusted-host "pypi.org files.pythonhosted.org pypi.python.org" | Out-Null
