@@ -2,8 +2,8 @@ Param([switch]$InstallPython)
 
 # Copyright 2022 Loh Ka Hong | Licensed under MIT
 
+# Throw error when "the setting is overridden by a policy defined at a more specific scope", https://stackoverflow.com/a/60549569
 # https://stackoverflow.com/a/68777742
-# https://stackoverflow.com/a/40491432
 # . { Set-ExecutionPolicy Bypass -Scope Process -Force } *> $null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
@@ -111,6 +111,7 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
     "workbench.startupEditor"          = "none"
   }
 
+  # Throw error if the directory already exists
   New-Item $vscodeSettingsDir -ItemType Directory -ErrorAction SilentlyContinue
   ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$vscodeSettingsDir\settings.json"
 
