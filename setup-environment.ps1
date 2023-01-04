@@ -1,10 +1,9 @@
 Param([switch]$InstallPython)
 
-# https://stackoverflow.com/a/43905715
-# Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1')) -ArgumentList "-InstallPython"
+# https://stackoverflow.com/a/68777742
+# Set-ExecutionPolicy Bypass -Scope Process -Force; & ([scriptblock]::Create((iwr -useb 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
-
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
     # https://stackoverflow.com/a/41476689
