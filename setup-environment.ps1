@@ -4,7 +4,7 @@ Param([switch]$InstallPython)
 
 # https://stackoverflow.com/a/68777742
 # https://stackoverflow.com/a/40491432
-# Set-ExecutionPolicy Bypass -Scope Process -Force; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
+# & { Set-ExecutionPolicy Bypass -Scope Process -Force } *> $null; & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
 
@@ -87,6 +87,7 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
   # https://stackoverflow.com/a/36751445
   Remove-Item "$Env:USERPROFILE/.vscode/extensions" -Force -Recurse -ErrorAction SilentlyContinue
 
+  $vscodeSettingsDir = "$Env:APPDATA\Code\User\"
   $vscodeSettings = [pscustomobject]@{
     "[python]"                         = [pscustomobject]@{
       "editor.tabSize" = 4
@@ -110,7 +111,8 @@ Start-Job -Name 'Configure VSCode' -ScriptBlock {
     "workbench.startupEditor"          = "none"
   }
 
-  ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$Env:APPDATA\Code\User\settings.json"
+  New-Item $vscodeSettingsDir -ItemType Directory
+  ConvertTo-Json -InputObject $vscodeSettings | Out-File -Encoding "UTF8" "$vscodeSettingsDir\settings.json"
 
   & { code --install-extension formulahendry.code-runner --force } *> $null
   & { code --install-extension github.github-vscode-theme --force } *> $null
