@@ -4,6 +4,7 @@ Param([switch]$InstallPython)
 # Set-ExecutionPolicy Bypass -Scope Process -Force; & ([scriptblock]::Create((iwr -useb 'https://raw.githubusercontent.com/mon-jai/network-programming/main/setup-environment.ps1'))) -InstallPython
 
 Import-Module BitsTransfer
+
 Start-Job -Name 'Enable clipboard' -ScriptBlock {
   try {
     # https://stackoverflow.com/a/41476689
